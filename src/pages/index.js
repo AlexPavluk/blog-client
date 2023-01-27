@@ -1,0 +1,10 @@
+export { Home } from "./Home/Home";
+export { FullPost } from "./FullPost";
+export { AddPost } from "./AddPost";
+export { Registration } from "./Registration";
+export { Login } from "./Login";
+export { Tags } from "./Tag/Tag";
+export { Profile } from "./Profile/Profile";
+export { AnotherProfile } from './AnotherProfile/AnotherProfile';
+export { ProfilePost } from "./ProfilePost/ProfilePost";
+export { EditProfile } from "./EditProfile/EditProfile";

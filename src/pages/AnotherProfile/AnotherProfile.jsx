@@ -2,12 +2,12 @@ import React from "react";
 import { isEmpty, uniqueId } from "lodash";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./AnotherProfile.module.scss";
-import axios from "../../axios";
-import { fetchPosts } from '../../redux/slices/posts';
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import axios from "../../axios";
+import { fetchPosts } from '../../redux/slices/posts';
 import { Post } from "../../components/Post/index";
+import styles from "./AnotherProfile.module.scss";
 
 export const AnotherProfile = () => {
   const { id } = useParams();

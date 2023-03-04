@@ -57,21 +57,17 @@ export const Profile = () => {
                                     tags={post.tags}
                                     isEditable={userData?._id === post.user._id}
                                 />
-
-                                {postsList.length >= 2 ?
-                                    <>
-                                        <Link to="/profile-posts">
-                                            <div className={styles.btn}>
-                                                Показать все мои статьи
-                                            </div>
-                                        </Link>
-                                    </> : ''}
-
                             </div>
-
                         )
-
                     })}
+                    {postsList.length >= 2 ?
+                        <>
+                            <Link to="/profile-posts">
+                                <div className={styles.btn}>
+                                    Показать все мои статьи
+                                </div>
+                            </Link>
+                        </> : ''}
                 </Grid>
             </Grid>
         </div >

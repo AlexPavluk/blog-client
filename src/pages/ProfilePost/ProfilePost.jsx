@@ -11,7 +11,7 @@ export const ProfilePost = () => {
     const { id } = useParams();
   const dispatch = useDispatch();
   const [data, setData] = useState({});
-  const postsList = useSelector((state) => state.posts.posts.items.slice(0, 2).filter(post => post.user._id === data._id));
+  const postsList = useSelector((state) => state.posts.posts.items.filter(post => post.user._id === data._id));
   const commentList = useSelector((state) => state.comment.items);
 
 
@@ -24,7 +24,7 @@ export const ProfilePost = () => {
       })
       .catch((err) => {
           console.warn(err);
-          alert("Ошибка при получении статьи");
+          // alert("Ошибка при получении статьи");
       });
         }, [id, dispatch]);
 

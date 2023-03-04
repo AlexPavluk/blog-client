@@ -1,5 +1,5 @@
 import React from 'react';
-import { uniqueId } from 'lodash';
+import { uniqueId, isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -19,8 +19,11 @@ export const Home = () => {
   const [postsList, setPostsList] = React.useState(posts.items);
   const userData = useSelector((state) => state.auth.data);
   const commentList = useSelector((state) => state.comment.items);
+
   const isPostsLoading = posts.status === 'loading';
   const isTagsLoading = tags.status === 'loading';
+
+
 
   React.useEffect(() => {
     dispatch(fetchPosts());
@@ -61,6 +64,7 @@ export const Home = () => {
             {postsList.map((post) => {
 
               const commentCount = commentList.filter(comment => comment.post === post._id);
+
 
               return (
                 <div

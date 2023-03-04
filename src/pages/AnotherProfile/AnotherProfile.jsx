@@ -79,19 +79,18 @@ export const AnotherProfile = () => {
                     viewsCount={post.viewsCount}
                     commentsCount={commentCount.length}
                     tags={post.tags}
-                    isEditable={data?._id === post.user._id}
+
                   />
                 </div>
-                { data.length >= 2 ? <>
-                    <Link to={`/profile/${id}/posts`}>
-                      <div className={styles.btn}>Показать больше</div>
-                    </Link>
-                  </> : "" 
-                  }
-
               </>
             );
           })}
+          {postsList.length >= 2 ? <>
+            <Link to={`/profile/${id}/posts`}>
+              <div className={styles.btn}>Показать больше</div>
+            </Link>
+          </> : ""
+          }
         </Grid>
       </Grid>
     </div>

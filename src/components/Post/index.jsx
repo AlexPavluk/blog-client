@@ -1,4 +1,5 @@
-import { uniqueId } from 'lodash';
+import { uniqueId, isEmpty } from 'lodash';
+import dayjs from 'dayjs';
 import { useDispatch, } from 'react-redux';
 import clsx from 'clsx';
 import { Link } from "react-router-dom";
@@ -28,6 +29,10 @@ export const Post = ({
   isLoading,
   isEditable,
 }) => {
+
+  const date = dayjs(createdAt).format('DD.MM.YYYY');
+
+  console.log(date, 'date')
   const dispatch = useDispatch();
 
   if (isLoading) {
@@ -62,7 +67,7 @@ export const Post = ({
         />
       )}
       <div className={styles.wrapper}>
-        <UserInfo {...user} additionalText={createdAt} />
+        <UserInfo {...user} additionalText={date} />
         <div className={styles.indention}>
           <h2 className={clsx(styles.title, { [styles.titleFull]: isFullPost })}>
             {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}

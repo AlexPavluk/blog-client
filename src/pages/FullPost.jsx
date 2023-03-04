@@ -8,7 +8,6 @@ import { Index } from "../components/AddComment";
 import { CommentsBlock } from "../components/CommentsBlock";
 import  ReactMarkdown  from "react-markdown";
 import axios from "../axios";
-import { filterId } from '../redux/slices/comment'
 import { fetchComment } from "../redux/slices/comment";
 
 export const FullPost = () => {
@@ -18,12 +17,6 @@ export const FullPost = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const commentList = useSelector((state) => state.comment.items.filter(items => items.post === id));
 
-
-  
-
-
-
-
   React.useEffect(() => {
     axios
     .get(`/posts/${id}`)
@@ -31,7 +24,6 @@ export const FullPost = () => {
       setData(res.data);
       setIsLoading(false);
       dispatch(fetchComment());
-      dispatch(filterId(id));
     }).catch((err) => {
       console.warn(err);
       alert('Ошибка при получении статьи')

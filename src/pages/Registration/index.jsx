@@ -32,7 +32,7 @@ export const Registration = () => {
       password: '',
       avatarImg
     },
-    mode: 'onChange'
+    mode: 'onBlur'
   });
 
   const handleChangeFile = async (event) => {
@@ -107,34 +107,45 @@ export const Registration = () => {
           <img className={styles.image} src={`${process.env.REACT_APP_API}${avatarImg}`} alt="Uploaded" />
 
       }
-        <form onSubmit={handleSubmit(onSubmit)}>
-        
-          <Button className = {styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
-             Загрузить фото
-            <input hidden accept="image/*" multiple type="file" />
-          </Button>
+      <form onSubmit={handleSubmit(onSubmit)}>
 
-          <TextField className={styles.field} label="Полное имя"
-            error={Boolean(errors.fullName?.message)}
-            helperText={errors.fullName?.message}
-            {...register('fullName', { required: 'Укажите почту' })}
-            fullWidth />
-          <TextField className={styles.field} label="E-Mail"
-            type="email"
-            error={Boolean(errors.email?.message)}
-            helperText={errors.email?.message}
-            {...register('email', { required: 'Укажите почту' })}
-            fullWidth />
-          <TextField className={styles.field} label="Пароль"
-            type="password"
-            error={Boolean(errors.password?.message)}
-            helperText={errors.password?.message}
-            {...register('password', { required: 'Укажите пароль' })}
-            fullWidth />
-          <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
-            Зарегистрироваться
-          </Button>
-        </form>
+        <Button className={styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
+          Загрузить фото
+          <input hidden accept="image/*" multiple type="file" />
+        </Button>
+
+        <TextField className={styles.field} label="Полное имя"
+          error={Boolean(errors.fullName?.message)}
+          helperText={errors.fullName?.message}
+          {...register('fullName', {
+            required: 'Укажите имя пользователя', minLength: {
+              value: 3,
+              message: 'Минимум 3 смивола'
+            }
+          })}
+          fullWidth />
+        <TextField className={styles.field} label="E-Mail"
+          type="email"
+          error={Boolean(errors.email?.message)}
+          helperText={errors.email?.message}
+          {...register('email', { required: 'Укажите почту' })}
+          fullWidth />
+        <TextField className={styles.field} label="Пароль"
+          type="password"
+          error={Boolean(errors.password?.message)}
+          helperText={errors.password?.message}
+          {...register('password', {
+            required: 'Укажите пароль',
+            minLength: {
+              value: 4,
+              message: 'Минимум 4 смивола'
+            }
+          })}
+          fullWidth />
+        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+          Зарегистрироваться
+        </Button>
+      </form>
       <ToastContainer
         position="bottom-center"
         autoClose={5000}

@@ -34,7 +34,7 @@ export const Login = () => {
 
     if (!isEmpty(error)) {
 
-      toast.error('Не удалось авторизоваться', {
+      toast.error('Неверный email или пароль', {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,

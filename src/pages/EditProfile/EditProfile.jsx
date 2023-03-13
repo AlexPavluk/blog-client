@@ -2,10 +2,10 @@
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Grommet, FileInput } from 'grommet';
+
+import { ToastContainer, toast } from 'react-toastify';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
-
 
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -24,8 +24,6 @@ export const EditProfile = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-
-
     const {
         register,
         handleSubmit,
@@ -38,11 +36,6 @@ export const EditProfile = () => {
         },
         mode: 'onChange'
     });
-
-
-
-
-
 
     const handleChangeFile = async (event) => {
         try {
@@ -69,12 +62,8 @@ export const EditProfile = () => {
             return alert('Не удалось за регистрироваться!');
         }
 
-       return navigate('/profile');
-
-
+        return navigate('/profile');
     }
-
-
 
     return (
 
@@ -95,34 +84,29 @@ export const EditProfile = () => {
                     <img className={styles.image} src={`${process.env.REACT_APP_API}${avatarImg}`} alt="Uploaded" />
 
             }
-            <Grommet>
-                <form >
+        <form onSubmit={handleSubmit(onSubmit)}>
+        
+        <Button className = {styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
+           Загрузить фото
+          <input hidden accept="image/*" multiple type="file" />
+        </Button>
 
-                    <FileInput
-                        name="file"
-                        onChange={handleChangeFile}
-                    />
-
-
-                    <TextField className={styles.field} label="Полное имя"
-                        error={Boolean(errors.fullName?.message)}
-                        helperText={errors.fullName?.message}
-                        {...register('fullName', { required: 'Укажите имя' })}
-                        fullWidth />
-                    <TextField className={styles.field} label="E-Mail"
-                        type="email"
-                        error={Boolean(errors.email?.message)}
-                        helperText={errors.email?.message}
-                        {...register('email', { required: 'Укажите почту' })}
-                        fullWidth />
-                   
-
-                    <Button disabled={!isValid} onClick={handleSubmit(onSubmit)} type="submit" size="large" variant="contained" fullWidth>
-                        Сохранить
-                    </Button>
-                </form>
-            </Grommet>
-
-        </Paper>
+        <TextField className={styles.field} label="Полное имя"
+          error={Boolean(errors.fullName?.message)}
+          helperText={errors.fullName?.message}
+          {...register('fullName', { required: 'Укажите почту' })}
+          fullWidth />
+        <TextField className={styles.field} label="E-Mail"
+          type="email"
+          error={Boolean(errors.email?.message)}
+          helperText={errors.email?.message}
+          {...register('email', { required: 'Укажите почту' })}
+          fullWidth />
+        
+        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+          Cохранить
+        </Button>
+      </form>
+        </Paper >
     );
 };

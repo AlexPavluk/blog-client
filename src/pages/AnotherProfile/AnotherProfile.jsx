@@ -53,7 +53,7 @@ export const AnotherProfile = () => {
       <h2> Дата регестации: {registerDate}</h2>
 
       <Grid container spacing={4}>
-        <Grid xs={8} item>
+        <Grid item xs={12} sm={8} md={8}>
           {postsList.map((post) => {
             const commentCount = commentList.filter(
               (comment) => comment.post === post._id

@@ -12,7 +12,11 @@
 .name {
     margin:  0 20px;
     font-size: 48px;
-
+    @media (max-width:400px) {
+        text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+    }
 }
 
 .mess {

@@ -4,7 +4,7 @@
   border: 1px solid #dedede;
   margin: 50px auto;
   @media (max-width: 450px) {
-      width: 280px;
+      width: 340px;
   }
 }
 
@@ -31,6 +31,9 @@
 .fileBtn {
   position: absolute;
   left: 25%;
+  @media (max-width: 450px) {
+    left: 20%;
+}
 }
 
 .image {

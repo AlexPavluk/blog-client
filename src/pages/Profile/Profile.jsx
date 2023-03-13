@@ -8,6 +8,7 @@ import { fetchPosts } from '../../redux/slices/posts';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid'
+import { GoOutConfirmAlert } from '../../components/ConfirmAlert/GoOutConfirmAlert';
 
 export const Profile = () => {
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export const Profile = () => {
                         <EditIcon />
                     </IconButton>
                 </Link>
+                <GoOutConfirmAlert/>
             </div>
             <h2> Kоличество постов: {postsList.length}</h2>
             <h2> Дата регестации: {registerDate}</h2>

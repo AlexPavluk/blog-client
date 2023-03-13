@@ -1,48 +1,61 @@
 import React from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { isEmpty } from "lodash";
+
 import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
 import styles from "./Login.module.scss";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () => {
   const isAuth = useSelector(selectIsAuth)
   const dispatch = useDispatch();
-    const { 
-      register,
-      handleSubmit,
-      formState:{ errors, isValid },
-     } = useForm ({
-      defaultValues: {
-        email: '',
-        password:'',
-      },
-      mode: 'onChange'
-    })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    mode: 'onChange'
+  })
 
-    const onSubmit = async (values) => {
-      const {error, payload} = await dispatch(fetchAuth(values))
-      
-      if(!isEmpty(error) ) {
+  const onSubmit = async (values) => {
+    const { error, payload } = await dispatch(fetchAuth(values))
 
-        alert('Не удалось авторизоватся!')
+    if (!isEmpty(error)) {
 
-        return
-      }
+      toast.error('Не удалось авторизоваться', {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
 
-      if('token' in payload) {
-        localStorage.setItem('token',  payload.token)
-      }
+      return
     }
 
-    if (isAuth) {
-      return < Navigate to="/" />
-    };
+    if ('token' in payload) {
+      localStorage.setItem('token', payload.token)
+    }
+  }
+
+  if (isAuth) {
+    return < Navigate to="/" />
+  };
 
   return (
     <Paper classes={{ root: styles.root }}>
@@ -53,23 +66,35 @@ export const Login = () => {
         <TextField
           className={styles.field}
           label="E-Mail"
-          type = "email" 
-          error = {Boolean(errors.email?.message)}
+          type="email"
+          error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
-          { ...register('email', {required: 'Укажите почту'})}
+          {...register('email', { required: 'Укажите почту' })}
           fullWidth
         />
-        <TextField className={styles.field} 
-        label="Пароль"
-        type= "password"
-        error = {Boolean(errors.password?.message)}
-        helperText={errors.password?.message}
-        { ...register('password', {required: 'Укажите пароль'})} 
-        fullWidth />
-        <Button disabled={!isValid}  type = "submit" size="large" variant="contained" fullWidth>
+        <TextField className={styles.field}
+          label="Пароль"
+          type="password"
+          error={Boolean(errors.password?.message)}
+          helperText={errors.password?.message}
+          {...register('password', { required: 'Укажите пароль' })}
+          fullWidth />
+        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
           Войти
         </Button>
       </form>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Paper>
   );
 };

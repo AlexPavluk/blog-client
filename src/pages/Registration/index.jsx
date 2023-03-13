@@ -1,7 +1,7 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Grommet, FileInput } from 'grommet';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -11,6 +11,7 @@ import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import { fetchRegister, selectIsAuth } from "../../redux/slices/auth";
+import 'react-toastify/dist/ReactToastify.css';
 import axios from '../../axios';
 
 import styles from './Login.module.scss';
@@ -45,7 +46,16 @@ export const Registration = () => {
       setAvatarImg(data.url)
     } catch (err) {
       console.warn(err)
-      alert("Ошибка при загрузке файла")
+      toast.error('Ошибка при загрузке файла', {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -53,7 +63,16 @@ export const Registration = () => {
     const data = await dispatch(fetchRegister({ ...values, avatarImg }));
 
     if (!data.payload) {
-      return alert('Не удалось за регистрироваться!');
+      toast.error('Не удалось зарегистрироваться', {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
     if ('token' in data.payload) {
@@ -85,13 +104,12 @@ export const Registration = () => {
           <img className={styles.image} src={`${process.env.REACT_APP_API}${avatarImg}`} alt="Uploaded" />
 
       }
-      <Grommet>
         <form onSubmit={handleSubmit(onSubmit)}>
-
-          <FileInput
-            name="file"
-            onChange={handleChangeFile}
-          />
+        
+          <Button className = {styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
+             Загрузить фото
+            <input hidden accept="image/*" multiple type="file" />
+          </Button>
 
           <TextField className={styles.field} label="Полное имя"
             error={Boolean(errors.fullName?.message)}
@@ -114,8 +132,18 @@ export const Registration = () => {
             Зарегистрироваться
           </Button>
         </form>
-      </Grommet>
-
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Paper>
   );
 };

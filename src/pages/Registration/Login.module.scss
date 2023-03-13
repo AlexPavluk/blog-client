@@ -3,6 +3,9 @@
   padding: 50px;
   border: 1px solid #dedede;
   margin: 50px auto;
+  @media (max-width: 450px) {
+      width: 280px;
+  }
 }
 
 .field {
@@ -19,13 +22,19 @@
 
 .avatar {
   display: flex;
+  object-fit: cover;
   justify-content: center;
   margin-bottom: 30px;
   cursor: pointer;
 }
 
-.image {
+.fileBtn {
+  position: absolute;
+  left: 25%;
+}
 
+.image {
+  object-fit: cover;
   display: block;
   margin-left: auto;
   margin-right: auto;

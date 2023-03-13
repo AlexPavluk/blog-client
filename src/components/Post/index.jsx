@@ -1,19 +1,18 @@
-import { uniqueId, isEmpty } from 'lodash';
+import { uniqueId } from 'lodash';
 import dayjs from 'dayjs';
-import { useDispatch, } from 'react-redux';
 import clsx from 'clsx';
 import { Link } from "react-router-dom";
 
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Clear';
 import EditIcon from '@mui/icons-material/Edit';
 import EyeIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import CommentIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 
 import { UserInfo } from '../UserInfo';
 import { PostSkeleton } from './Skeleton';
-import { fetchRemovePost } from '../../redux/slices/posts';
 import styles from './Post.module.scss';
+import { DeleteConfirmAlert }  from '../ConfirmAlert/DeleteConfirmAlert';
+
 
 export const Post = ({
   id,
@@ -32,32 +31,22 @@ export const Post = ({
 
   const date = dayjs(createdAt).format('DD.MM.YYYY');
 
-  console.log(date, 'date')
-  const dispatch = useDispatch();
-
   if (isLoading) {
     return <PostSkeleton />;
   }
 
-  const onClickRemove = () => {
-    if(window.confirm("Вы действительно хотите удалить статью?")) {
-      dispatch(fetchRemovePost(id))
-    }
-  };
-
   return (
     <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
       {isEditable && (
-        <div className={styles.editButtons}>
+        <><div className={styles.editButtons}>
           <Link to={`/posts/${id}/edit`}>
             <IconButton color="primary">
               <EditIcon />
             </IconButton>
           </Link>
-          <IconButton onClick={onClickRemove} color="secondary">
-            <DeleteIcon />
-          </IconButton>
+          <DeleteConfirmAlert id={id} />
         </div>
+        </>
       )}
       {imageUrl && (
         <img

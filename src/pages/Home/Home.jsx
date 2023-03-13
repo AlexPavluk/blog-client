@@ -1,5 +1,5 @@
 import React from 'react';
-import { uniqueId, isEmpty } from 'lodash';
+import { uniqueId } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';

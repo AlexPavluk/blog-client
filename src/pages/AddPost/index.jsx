@@ -2,8 +2,12 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 import SimpleMDE from 'react-simplemde-editor';
+import { ToastContainer, toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 import 'easymde/dist/easymde.min.css';
 import styles from './AddPost.module.scss';
 
@@ -17,7 +21,6 @@ export const AddPost = () => {
   const isAuth = useSelector(selectIsAuth);
   const navigate = useNavigate();
   const [text, setText] = React.useState('');
-  // eslint-disable-next-line no-unused-vars
   const [isLoading, setIsLoading] = React.useState('')
   const [title, setTitle] = React.useState('');
   const [tags, setTags] = React.useState('');
@@ -36,12 +39,18 @@ export const AddPost = () => {
       setImageUrl(data.url)
     } catch (err) {
       console.warn(err)
-      alert("Ошибка при загрузке файла")
+      toast.error('Ошибка при загрузке файла', {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
-
-
-
 
   const onClickRemoveImage = () => {
     setImageUrl('')
@@ -52,8 +61,8 @@ export const AddPost = () => {
   }, []);
 
   React.useEffect(() => {
-    if(id) {
-      axios.get(`/posts/${id}`).then(({data}) =>{
+    if (id) {
+      axios.get(`/posts/${id}`).then(({ data }) => {
         setText(data.text)
         setTags(data.tags.join(','))
         setTitle(data.title)
@@ -77,6 +86,14 @@ export const AddPost = () => {
     [],
   );
 
+  if (isLoading) {
+    return (
+      <Box sx={{ width: '100%' }}>
+        <LinearProgress />
+      </Box>
+    )
+  }
+
   if (!window.localStorage.getItem('token') && !isAuth) {
     return < Navigate to="/" />
   };
@@ -93,15 +110,24 @@ export const AddPost = () => {
       }
 
       const { data } = isEditing
-       ? await axios.patch(`/posts/${id}`, fields)
-       : await axios.post('/posts', fields);
+        ? await axios.patch(`/posts/${id}`, fields)
+        : await axios.post('/posts', fields);
 
       const _id = isEditing ? id : data._id;
 
       navigate(`/posts/${_id}`)
     } catch (err) {
       console.warn(err)
-      alert("Ошибка при создании статьи")
+      toast.error('Ошибка при создании статьи', {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
 
   }
@@ -146,6 +172,19 @@ export const AddPost = () => {
           <Button size="large">Отмена</Button>
         </a>
       </div>
+
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Paper>
   );
 };

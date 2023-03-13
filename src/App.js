@@ -3,6 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import { Header } from "./components";
 import { Home, FullPost, Tags, Registration, AddPost, Login, Profile, ProfilePost, EditProfile, AnotherProfile } from "./pages";
 import React from "react";
+import { GoOutConfirmAlert } from "./components/ConfirmAlert/GoOutConfirmAlert";
+
+
+
 
 function App() {
 
@@ -22,6 +26,7 @@ function App() {
           <Route path="/profile/:id/posts" element={<ProfilePost />} />
           <Route path="/profile-edit" element={<EditProfile />} />
           <Route path="/profile/:id" element={<AnotherProfile />} />
+          <Route path="/delete-alert" element={<GoOutConfirmAlert />} />
         </Routes>
       </Container>
     </>

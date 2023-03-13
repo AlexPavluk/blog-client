@@ -69,7 +69,7 @@ export const EditProfile = () => {
             return alert('Не удалось за регистрироваться!');
         }
 
-        navigate('/');
+       return navigate('/profile');
 
 
     }

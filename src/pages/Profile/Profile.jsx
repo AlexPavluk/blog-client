@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Post } from '../../components/Post';
 import styles from './Profile.module.scss';
 import { fetchPosts } from '../../redux/slices/posts';
+import { fetchAuthMe } from "../../redux/slices/auth";
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Grid'
@@ -21,6 +22,7 @@ export const Profile = () => {
 
     React.useEffect(() => {
         dispatch(fetchPosts())
+        dispatch(fetchAuthMe())
     }, [dispatch])
     return (
 

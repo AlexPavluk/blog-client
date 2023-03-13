@@ -63,6 +63,9 @@ export const Registration = () => {
     const data = await dispatch(fetchRegister({ ...values, avatarImg }));
 
     if (!data.payload) {
+
+      console.log(data.payload)
+
       toast.error('Не удалось зарегистрироваться', {
         position: "bottom-center",
         autoClose: 5000,

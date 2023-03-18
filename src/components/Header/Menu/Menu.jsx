@@ -1,4 +1,3 @@
-// import { logout } from "../../../redux/slices/auth";
 import useOutsideAlert from "../useOutsiteAlerter";
 import styles from "./Menu.module.scss";
 
@@ -11,22 +10,13 @@ import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
-// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PostAddIcon from '@mui/icons-material/PostAdd';
-// import { GoOutConfirmAlert } from "../../ConfirmAlert/GoOutConfirmAlert";
+
 
 const Menu = () => {
   const { ref, isShow, setIsShow } = useOutsideAlert(false);
-  // const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.data);
-
-  // const onClickLogout = () => {
-  //   if (window.confirm("Вы действительно хотите выйти?")) {
-  //     dispatch(logout());
-  //     window.localStorage.removeItem("token");
-  //   }
-  // };
 
   return (
       <div>

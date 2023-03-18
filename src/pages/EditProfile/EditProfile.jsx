@@ -1,11 +1,12 @@
-
-import React from 'react';
+import { useState } from 'react';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import { ToastContainer, toast } from 'react-toastify';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from 'lodash';
@@ -18,9 +19,9 @@ import axios from '../../axios';
 import styles from './EditProfile.module.scss'
 
 export const EditProfile = () => {
-
     const { fullName, email, avatarUrl } = useSelector((state) => state.auth.data);
-    const [avatarImg, setAvatarImg] = React.useState(avatarUrl);
+    const [avatarImg, setAvatarImg] = useState(avatarUrl);
+    const [isLoading, setIsLoading] = useState('')
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -53,60 +54,78 @@ export const EditProfile = () => {
     };
 
     const onSubmit = async (values) => {
-
-
         const data = await dispatch(fetchEditRegister({ ...values, avatarImg }));
-
-
+        setIsLoading(true)
         if (!data.payload) {
-            return alert('Не удалось за регистрироваться!');
+            return toast.error('Неудалось изменить пользователя', {
+                position: "bottom-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
-
         return navigate('/profile');
     }
 
+    if (isLoading) {
+        return (
+            <Box sx={{ width: '100%' }}>
+                <LinearProgress />
+            </Box>
+        )
+    }
+
     return (
-
         <Paper classes={{ root: styles.root }}>
-
             <Typography classes={{ root: styles.title }} variant="h5">
                 Изменение аккаунта
             </Typography>
             {
-
                 avatarImg.length === 0 ?
-
                     <div className={styles.avatar}>
                         <img className={styles.image} src={avatarUrl ? `${process.env.REACT_APP_API}${avatarUrl}` : '/noavatar.png'} alt="Uploaded" />
-
                     </div> :
-
                     <img className={styles.image} src={`${process.env.REACT_APP_API}${avatarImg}`} alt="Uploaded" />
-
             }
-        <form onSubmit={handleSubmit(onSubmit)}>
-        
-        <Button className = {styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
-           Загрузить фото
-          <input hidden accept="image/*" multiple type="file" />
-        </Button>
+            <form onSubmit={handleSubmit(onSubmit)}>
 
-        <TextField className={styles.field} label="Полное имя"
-          error={Boolean(errors.fullName?.message)}
-          helperText={errors.fullName?.message}
-          {...register('fullName', { required: 'Укажите почту' })}
-          fullWidth />
-        <TextField className={styles.field} label="E-Mail"
-          type="email"
-          error={Boolean(errors.email?.message)}
-          helperText={errors.email?.message}
-          {...register('email', { required: 'Укажите почту' })}
-          fullWidth />
-        
-        <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
-          Cохранить
-        </Button>
-      </form>
+                <Button className={styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
+                    Загрузить фото
+                    <input hidden accept="image/*" multiple type="file" />
+                </Button>
+
+                <TextField className={styles.field} label="Полное имя"
+                    error={Boolean(errors.fullName?.message)}
+                    helperText={errors.fullName?.message}
+                    {...register('fullName', { required: 'Укажите почту' })}
+                    fullWidth />
+                <TextField className={styles.field} label="E-Mail"
+                    type="email"
+                    error={Boolean(errors.email?.message)}
+                    helperText={errors.email?.message}
+                    {...register('email', { required: 'Укажите почту' })}
+                    fullWidth />
+
+                <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+                    Cохранить
+                </Button>
+            </form>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </Paper >
     );
 };

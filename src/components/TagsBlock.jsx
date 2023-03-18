@@ -1,6 +1,7 @@
 import React from "react";
 import { uniqueId } from 'lodash';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom";
 import { SideBlock } from "./SideBlock";
 
 import List from "@mui/material/List";
@@ -24,10 +25,9 @@ export const TagsBlock = ({ items, isLoading = true }) => {
       <List>
         {items.map((tag, i) => (
 
-          <a
+          <Link
             style={{ textDecoration: "none", color: "black" }}
-            href={`/tags/${tag}`}
-          >
+            to={`/tags/${tag}`}>
             <ListItem key={uniqueId(i)} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -40,7 +40,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
                 )}
               </ListItemButton>
             </ListItem>
-          </a>
+          </Link>
         ))}
       </List>
     </SideBlock>

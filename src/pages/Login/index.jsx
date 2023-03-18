@@ -33,7 +33,6 @@ export const Login = () => {
     const { error, payload } = await dispatch(fetchAuth(values))
 
     if (!isEmpty(error)) {
-
       toast.error('Неверный email или пароль', {
         position: "bottom-center",
         autoClose: 5000,

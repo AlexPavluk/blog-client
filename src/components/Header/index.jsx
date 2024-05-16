@@ -23,7 +23,7 @@ export const Header = () => {
       <Container maxWidth="lg">
         <div className={styles.inner}>
           <Link className={styles.link} to="/">
-            <div className={styles.logo}>PAVLUK BLOG</div>
+            <div className={styles.logo}>BLOG</div>
           </Link>
           <div className={styles.buttons}>
 
@@ -31,11 +31,11 @@ export const Header = () => {
               <>
                 <Link to="/login">
                   <div className={styles.log}>
-                    <Button className={styles.log} variant="contained">Войти</Button>
+                    <Button className={styles.log} variant="contained">Log in</Button>
                   </div>
                 </Link>
                 <Link to="/register">
-                  <Button variant="contained">Создать аккаунт</Button>
+                  <Button variant="contained">Sign in</Button>
                 </Link>
               </>
             )}

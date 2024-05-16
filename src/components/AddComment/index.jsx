@@ -21,7 +21,7 @@ export const Index = (props) => {
   const dispatch = useDispatch();
   const post = props.postId;
   const commentError = () => {
-    toast.error('Ошибка создания комментария', {
+    toast.error('Error creating a comment', {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -33,7 +33,7 @@ export const Index = (props) => {
   })
   }
   const authAlert = () => {
-    toast.info('Зарегестируйтесь или Войдите, чтобы коментировать посты', {
+    toast.info('Register or Login to comment on posts', {
     position: "bottom-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -81,7 +81,7 @@ export const Index = (props) => {
         />
         <div className={styles.form}>
           <TextField
-            label="Написать комментарий"
+            label="Write a comment"
             variant="outlined"
             maxRows={10}
             multiline
@@ -92,7 +92,7 @@ export const Index = (props) => {
 
 
 
-          <Button type="submit" onClick={onSubmit} variant="contained">Отправить</Button>
+          <Button type="submit" onClick={onSubmit} variant="contained">Send</Button>
         </div>
       </div>
       <ToastContainer

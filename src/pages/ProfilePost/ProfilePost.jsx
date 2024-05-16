@@ -11,9 +11,10 @@ export const ProfilePost = () => {
     const { id } = useParams();
   const dispatch = useDispatch();
   const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState('')
+  const userData = useSelector((state) => state.auth.data);
   const postsList = useSelector((state) => state.posts.posts.items.filter(post => post.user._id === data._id));
   const commentList = useSelector((state) => state.comment.items);
-
 
     useEffect(() => {
         axios
@@ -21,17 +22,18 @@ export const ProfilePost = () => {
       .then((res) => {
           setData(res.data);
           dispatch(fetchPosts())
+
+          setIsLoading(true)
       })
       .catch((err) => {
           console.warn(err);
-          // alert("Ошибка при получении статьи");
       });
-        }, [id, dispatch]);
-
+        }, [id, dispatch, isLoading]);
 
   return (
     <>
-    <h2>Посты пользователя: {data?.fullName}</h2>
+
+    <h2>User Posts: {data?.fullName}</h2>
       <Grid container spacing={4}>
         <Grid xs={8} item>
           {postsList.map((post) => {
@@ -51,7 +53,7 @@ export const ProfilePost = () => {
                   viewsCount={post.viewsCount}
                   commentsCount={commentCount.length}
                   tags={post.tags}
-                  isEditable={data?._id === post.user._id}
+                  isEditable={userData?._id === post.user._id}
                 />
               </div>
             )

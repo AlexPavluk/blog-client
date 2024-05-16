@@ -18,7 +18,7 @@ export const CommentsBlock = ({ items, children, isLoading = true }) => {
   }
 
   return (
-    <SideBlock title="Комментарии">
+    <SideBlock title="Comments">
       <List>
         {items.map((obj, index) => (
           <React.Fragment key={index}>

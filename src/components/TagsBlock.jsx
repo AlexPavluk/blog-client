@@ -21,11 +21,11 @@ export const TagsBlock = ({ items, isLoading = true }) => {
   }
 
   return (
-    <SideBlock title="Тэги">
+    <SideBlock title="Tags">
       <List>
         {items.map((tag, i) => (
-
           <Link
+            key={uniqueId()}
             style={{ textDecoration: "none", color: "black" }}
             to={`/tags/${tag}`}>
             <ListItem key={uniqueId(i)} disablePadding>
@@ -41,6 +41,7 @@ export const TagsBlock = ({ items, isLoading = true }) => {
               </ListItemButton>
             </ListItem>
           </Link>
+          
         ))}
       </List>
     </SideBlock>

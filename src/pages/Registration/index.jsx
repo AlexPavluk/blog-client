@@ -46,7 +46,7 @@ export const Registration = () => {
       setAvatarImg(data.url)
     } catch (err) {
       console.warn(err)
-      toast.error('Ошибка при загрузке файла', {
+      toast.error('Error when uploading a file', {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -66,7 +66,7 @@ export const Registration = () => {
 
       console.log(data.payload)
 
-      toast.error('Не удалось зарегистрироваться', {
+      toast.error('Failed to register', {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -91,7 +91,7 @@ export const Registration = () => {
     <Paper classes={{ root: styles.root }}>
 
       <Typography classes={{ root: styles.title }} variant="h5">
-        Создание аккаунта
+        Register
       </Typography>
       {
 
@@ -110,17 +110,17 @@ export const Registration = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
 
         <Button className={styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
-          Загрузить фото
+          Upload photo
           <input hidden accept="image/*" multiple type="file" />
         </Button>
 
-        <TextField className={styles.field} label="Полное имя"
+        <TextField className={styles.field} label="Full name"
           error={Boolean(errors.fullName?.message)}
           helperText={errors.fullName?.message}
           {...register('fullName', {
-            required: 'Укажите имя пользователя', minLength: {
+            required: 'Enter the user name', minLength: {
               value: 3,
-              message: 'Минимум 3 смивола'
+              message: 'Minimum of 3 characters'
             }
           })}
           fullWidth />
@@ -128,22 +128,22 @@ export const Registration = () => {
           type="email"
           error={Boolean(errors.email?.message)}
           helperText={errors.email?.message}
-          {...register('email', { required: 'Укажите почту' })}
+          {...register('email', { required: 'Enter a email' })}
           fullWidth />
-        <TextField className={styles.field} label="Пароль"
+        <TextField className={styles.field} label="Password"
           type="password"
           error={Boolean(errors.password?.message)}
           helperText={errors.password?.message}
           {...register('password', {
-            required: 'Укажите пароль',
+            required: 'Enter a passowrd',
             minLength: {
               value: 4,
-              message: 'Минимум 4 смивола'
+              message: 'Minimum of 4 characters'
             }
           })}
           fullWidth />
         <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
-          Зарегистрироваться
+          Sign in
         </Button>
       </form>
       <ToastContainer

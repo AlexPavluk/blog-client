@@ -76,7 +76,7 @@ export const AddPost = () => {
       spellChecker: false,
       maxHeight: '400px',
       autofocus: true,
-      placeholder: 'Введите текст...',
+      placeholder: 'Enter text...',
       status: false,
       autosave: {
         enabled: true,
@@ -118,7 +118,7 @@ export const AddPost = () => {
       navigate(`/posts/${_id}`)
     } catch (err) {
       console.warn(err)
-      toast.error('Ошибка при создании статьи', {
+      toast.error('Error when creating an post', {
         position: "bottom-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -135,13 +135,13 @@ export const AddPost = () => {
   return (
     <Paper style={{ padding: 30 }}>
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-        Загрузить превью
+      Download preview
       </Button>
       <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
         <>
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
-            Удалить
+            Delete
           </Button>
           <img className={styles.image} src={`${process.env.REACT_APP_API}${imageUrl}`} alt="Uploaded" />
         </>
@@ -151,7 +151,7 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Post headline..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
@@ -159,17 +159,17 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.tags }}
         variant="standard"
-        placeholder="Тэги"
+        placeholder="Tags"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
         fullWidth />
       <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          {isEditing ? 'Сохранить' : 'Опубликовать'}
+          {isEditing ? 'Save' : 'Publish it'}
         </Button>
         <a href="/">
-          <Button size="large">Отмена</Button>
+          <Button size="large">Cancel</Button>
         </a>
       </div>
 

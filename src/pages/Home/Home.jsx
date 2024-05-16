@@ -55,8 +55,8 @@ export const Home = () => {
   return (
     <>
       <Tabs className={style.tabs} style={{ marginBottom: 15 }} value={activeTabIndex} aria-label="basic tabs example">
-        <Tab onClick={() => setActiveTabIndex(0)} label="Новые" />
-        <Tab onClick={() => setActiveTabIndex(1)} label="Популярные" />
+        <Tab onClick={() => setActiveTabIndex(0)} label="New" />
+        <Tab onClick={() => setActiveTabIndex(1)} label="Popular" />
       </Tabs>
       <Grid container spacing={4} item className={style.leftblok} >
         <Grid  item xs={12} sm={8} md={8}>

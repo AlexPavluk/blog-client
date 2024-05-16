@@ -56,7 +56,6 @@ export const GoOutConfirmAlert = () => {
             <ListItemIcon onClick={handleClickOpen}>
                 <ExitToAppIcon  />
             </ListItemIcon>
-            {/* <ListItemText >Выйти</ListItemText> */}
         </MenuItem><div>
                 <Dialog
                     open={open}
@@ -65,18 +64,18 @@ export const GoOutConfirmAlert = () => {
                     aria-labelledby="draggable-dialog-title"
                 >
                     <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                        Выход из учетной записи
+                        Log out
                     </DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Вы действительно хотите выйти из учетной записи?
+                            Are you sure?
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={handleClose}>
-                            Отмена
+                            Cancel
                         </Button>
-                        <Button onClick={onClickLogout}>Да</Button>
+                        <Button onClick={onClickLogout}>Yes</Button>
                     </DialogActions>
                 </Dialog>
             </div></>

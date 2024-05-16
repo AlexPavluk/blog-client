@@ -49,7 +49,7 @@ export const EditProfile = () => {
             setAvatarImg(data.url)
         } catch (err) {
             console.warn(err)
-            alert("Ошибка при загрузке файла")
+            alert("Error when uploading a file")
         }
     };
 
@@ -57,7 +57,7 @@ export const EditProfile = () => {
         const data = await dispatch(fetchEditRegister({ ...values, avatarImg }));
         setIsLoading(true)
         if (!data.payload) {
-            return toast.error('Неудалось изменить пользователя', {
+            return toast.error('Failed to change the user', {
                 position: "bottom-center",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -82,7 +82,7 @@ export const EditProfile = () => {
     return (
         <Paper classes={{ root: styles.root }}>
             <Typography classes={{ root: styles.title }} variant="h5">
-                Изменение аккаунта
+                Edit user
             </Typography>
             {
                 avatarImg.length === 0 ?
@@ -94,24 +94,24 @@ export const EditProfile = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
 
                 <Button className={styles.fileBtn} onChange={handleChangeFile} variant="contained" component="label">
-                    Загрузить фото
+                    Upload photo
                     <input hidden accept="image/*" multiple type="file" />
                 </Button>
 
-                <TextField className={styles.field} label="Полное имя"
+                <TextField className={styles.field} label="name"
                     error={Boolean(errors.fullName?.message)}
                     helperText={errors.fullName?.message}
-                    {...register('fullName', { required: 'Укажите почту' })}
+                    {...register('fullName', { required: 'Enter a name' })}
                     fullWidth />
                 <TextField className={styles.field} label="E-Mail"
                     type="email"
                     error={Boolean(errors.email?.message)}
                     helperText={errors.email?.message}
-                    {...register('email', { required: 'Укажите почту' })}
+                    {...register('email', { required: 'Enter a email' })}
                     fullWidth />
 
                 <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
-                    Cохранить
+                    Save
                 </Button>
             </form>
             <ToastContainer

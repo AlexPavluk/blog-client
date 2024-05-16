@@ -47,18 +47,18 @@ export const DeleteConfirmAlert = ({id}) => {
         aria-labelledby="draggable-dialog-title"
       >
         <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-          Удаление статьи
+          Delete post
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Вы действительно хотите удалить статью?
+            Are you sure?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose}>
-            Отмена
+            Cancel
           </Button>
-          <Button onClick={() => dispatch(fetchRemovePost(id))}>Да</Button>
+          <Button onClick={() => dispatch(fetchRemovePost(id))}>Yes</Button>
         </DialogActions>
       </Dialog>
     </div>

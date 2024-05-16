@@ -30,7 +30,7 @@ export const AnotherProfile = () => {
       })
       .catch((err) => {
         console.warn(err);
-        alert("Ошибка при получении статьи");
+        alert("Error when receiving an post");
       });
   }, [id, dispatch]);
 
@@ -49,8 +49,8 @@ export const AnotherProfile = () => {
 
         <h1 className={styles.name}>{data.fullName}</h1>
       </div>
-      <h2> Kоличество постов: {postsList.length}</h2>
-      <h2> Дата регестации: {registerDate}</h2>
+      <h2> Number of posts: {postsList.length}</h2>
+      <h2> Date of regestation: {registerDate}</h2>
 
       <Grid container spacing={4}>
         <Grid item xs={12} sm={8} md={8}>
@@ -87,7 +87,7 @@ export const AnotherProfile = () => {
           })}
           {postsList.length >= 2 ? <>
             <Link to={`/profile/${id}/posts`}>
-              <div className={styles.btn}>Показать больше</div>
+              <div className={styles.btn}>Show more</div>
             </Link>
           </> : ""
           }

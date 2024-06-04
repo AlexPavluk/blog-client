@@ -134,8 +134,8 @@ export const AddPost = () => {
 
   return (
     <Paper style={{ padding : 30 }}>
-      <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large" className={ styles.buttonFile }>
-      Download preview
+      <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large" style={{ margin: 10}}>
+      Add preview
       </Button>
       <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (

@@ -26,7 +26,7 @@ export const Login = () => {
       email: '',
       password: '',
     },
-    mode: 'onChange'
+    mode: 'onBlur'
   })
 
   const onSubmit = async (values) => {

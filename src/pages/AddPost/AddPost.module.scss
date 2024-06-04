@@ -42,3 +42,13 @@
     margin-right: 15px;
   }
 }
+
+.buttonFile {
+  margin: 10px;
+
+  @media (max-width: 375px) {
+    margin: 5px;
+    padding: 3.5px;
+    white-space: nowrap;
+}
+}

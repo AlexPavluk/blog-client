@@ -29,7 +29,7 @@ export const FullPost = () => {
         dispatch(fetchComment());
       }).catch((err) => {
         console.warn(err);
-        toast.error('Ошибка при получении статьи', {
+        toast.error('Cannot get all posts', {
           position: "bottom-center",
           autoClose: 5000,
           hideProgressBar: false,
